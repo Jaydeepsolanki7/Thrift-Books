@@ -1,0 +1,15 @@
+<%= form_with model: @category do |form| %>
+  <div>
+    <%= form.label :name %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :cat_image %>
+    <%= form.text_field :cat_image%>
+  </div>
+
+  <div>
+    <%= form.submit class:"btn"%>
+  </div>
+<% end %>
