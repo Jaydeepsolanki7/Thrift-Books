@@ -7,23 +7,24 @@
     </button>
 
       <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success " type="submit">Search</button>
       </form>
         <% if user_signed_in? %> 
-          <div class="nav-item dropdown me-5">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <div class="nav-item dropdown me-4">
+            <a class="nav-link dropdown-toggle me-5" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Account
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <%= link_to 'Edit Profile ', edit_user_registration_path,class:"dropdown-item my-1 me-auto" %>
-              <li><a class="dropdown-item" href="#">Something else</a></li>
+              <li><a class="dropdown-item" href="#">Something</a></li>
               <li><hr class="dropdown-divider"></li>
               <%= button_to "Sign out", destroy_user_session_path, class: "dropdown-item  my-1 me-auto", method: :delete %> 
             </ul>
           </div>
         <%else%>
-          <%= button_to "Sign in", new_user_session_path, class:"nav-link active ms-5 " %>/<%= link_to "Sign up", new_user_registration_path	, class:"nav-link active me-4" %>
+          <%= button_to "Sign in", new_user_session_path, class:"nav-link active ms-5 " %>/
+          <%= link_to "Sign up", new_user_registration_path	, class:"nav-link active me-5" %>
         <%end%>
     </div>
   </div>
