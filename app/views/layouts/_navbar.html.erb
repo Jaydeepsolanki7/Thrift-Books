@@ -5,13 +5,15 @@
     <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
-      <form class="d-flex">
-        <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success " type="submit">Search</button>
-      </form>
+        <form class="d-flex">
+          <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success ms-2 " type="submit">Search</button>
+        </form>
         <% if user_signed_in? %> 
-          <div class="nav-item dropdown me-4">
+          <div class="nav-item dropdown ">
             <a class="nav-link dropdown-toggle me-5" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Account
             </a>
@@ -23,9 +25,10 @@
             </ul>
           </div>
         <%else%>
-          <%= button_to "Sign in", new_user_session_path, class:"nav-link active ms-5 " %>/
-          <%= link_to "Sign up", new_user_registration_path	, class:"nav-link active me-5" %>
+          <%= button_to "Sign in", new_user_session_path, class:"nav-link active " %>
+          <%= link_to "Sign up", new_user_registration_path	, class:"nav-link active" %>
         <%end%>
+      </ul>
     </div>
   </div>
 </nav>
