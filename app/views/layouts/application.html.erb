@@ -11,6 +11,9 @@
   </head>
 
   <body>
-    <%= yield %>
+    <%= render "layouts/navbar" %>
+    <div class="conatiner ms-4">
+      <%= yield %>
+    </div>
   </body>
 </html>
