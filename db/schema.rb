@@ -10,7 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_27_092249) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_27_101923) do
+  create_table "books", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.integer "price"
+    t.string "cover_image"
+    t.boolean "availability"
+    t.float "rating"
+    t.integer "quantity"
+    t.integer "author_id", null: false
+    t.integer "category_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_books_on_author_id"
+    t.index ["category_id"], name: "index_books_on_category_id"
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.string "cat_image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string "name"
     t.string "resource_type"
@@ -46,4 +69,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_27_092249) do
     t.index ["user_id"], name: "index_users_roles_on_user_id"
   end
 
+  add_foreign_key "books", "categories"
+  add_foreign_key "books", "users", column: "author_id"
 end
