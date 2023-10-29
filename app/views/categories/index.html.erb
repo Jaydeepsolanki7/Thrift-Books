@@ -17,7 +17,7 @@
         <% end %>
       </div>
       <% if user_signed_in? && current_user.has_role?(:admin) %>
-        <%= link_to "Add new category", new_category_path, class:"btn btn-secondary ms-auto mt-4" %>
+        <%= link_to "Add new category", new_category_path, class:"btn btn-secondary mt-4" %>
       <% end %>
     </div>
   </div>

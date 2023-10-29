@@ -51,6 +51,9 @@ gem "bootsnap", require: false
 gem "devise"
 #
 gem "rolify"
+#
+gem 'cancancan'
+
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

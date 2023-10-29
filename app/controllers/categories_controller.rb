@@ -1,5 +1,7 @@
 class CategoriesController < ApplicationController
   # before_action :authenticate_user!
+  before_action :authenticate_admin!, only: [:new, :create]
+
 
   def index
     @categories = Category.all
@@ -12,10 +14,12 @@ class CategoriesController < ApplicationController
 
   def new
     @category = Category.new
+    authorize! :create, @category
   end
 
   def create
     @category = Category.create(category_params)
+    authorize! :create, @category
     if @category.save
       redirect_to root_path
     else
