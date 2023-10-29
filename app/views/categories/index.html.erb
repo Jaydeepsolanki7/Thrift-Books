@@ -1,16 +1,18 @@
 <div class="container">
-  <div class="row">
+  <div class="row ms-5">
     <div class="col-md-16 my-3">
       <h1 class=" mt-4 mb-4 text-center">Categories</h1>
 
       <div class="row">
         <% @categories.each do |category| %>
           <div class="card shadow me-2" style="width: 18rem; height: 18rem; ">
-          <img src="..." class="card-img-top" alt="...">
             <div class="my-auto mb-5 mx-auto">
+              <% if category.cat_image.attached? %>
+                <%= image_tag category.cat_image, class: "card-img-top" %>
+              <% end %>
               <div card="card-body my-auto mb-5 mx-auto">
                 <h4 class="card-title"><i><%= category.name%></i></h4>
-                <%= link_to "View Details", category, class:"btn btn-outline-success mb-1"%>
+                <%= link_to "View Books", category, class:"btn btn-outline-success mb-1"%>
               </div>
             </div>
           </div>

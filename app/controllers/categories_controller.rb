@@ -1,7 +1,5 @@
 class CategoriesController < ApplicationController
-  # before_action :authenticate_user!
-  before_action :authenticate_admin!, only: [:new, :create]
-
+  before_action :authenticate_admin!, only: [:new, :create, :edit, :update]
 
   def index
     @categories = Category.all
@@ -14,16 +12,27 @@ class CategoriesController < ApplicationController
 
   def new
     @category = Category.new
-    authorize! :create, @category
   end
 
   def create
     @category = Category.create(category_params)
-    authorize! :create, @category
     if @category.save
       redirect_to root_path
     else
       render :new, status: :unprocessable_entity
+    end
+  end
+
+  def edit
+    @category = Category.find(params[:id])
+  end
+
+  def update
+    @category = Category.find(params[:id])
+    if @category.update(category_params)
+      redirect_to category_path(@category)
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
