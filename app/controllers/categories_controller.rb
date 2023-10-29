@@ -1,4 +1,6 @@
 class CategoriesController < ApplicationController
+  # before_action :authenticate_user!
+
   def index
     @categories = Category.all
   end
@@ -17,7 +19,7 @@ class CategoriesController < ApplicationController
     if @category.save
       redirect_to root_path
     else
-      render :new, status: :see_other
+      render :new, status: :unprocessable_entity
     end
   end
 
