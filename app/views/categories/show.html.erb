@@ -1,11 +1,11 @@
 <div class="row ms-5">
   <div class="col-lg-12">
-    <h1 class="mt-4 mb-4 text-center">All <%= @category.name%></h1>
+    <h1 class="mt-4 mb-4 text-center"><%= @category.name%> Books</h1>
 
     <div class="row">
       <% @books.each do |book| %>
-        <div class="card shadow me-2" style="width: 9rem; height: 18rem; ">
-        <img src="..." class="card-img-top" alt="...">
+        <div class="card shadow me-2" style="width: 12rem; height: 18rem; ">
+        <img src="https://www.snapdeal.com/product/the-psychology-of-money-timeless/664769810416" class="card-img-top" alt="...">
           <div class="my-auto mb-5 mx-auto">
             <div card="card-body my-auto mb-5 mx-auto">
               <h4 class="card-title"><%= book.title %></h4>
