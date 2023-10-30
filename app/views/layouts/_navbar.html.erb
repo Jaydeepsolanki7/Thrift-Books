@@ -14,8 +14,8 @@
         </form>
         <% if user_signed_in? %> 
           <div class="nav-item dropdown ">
-            <a class="nav-link dropdown-toggle me-5" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Account
+            <a class="nav-link dropdown-toggle me-3" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <%= current_user.email%>
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <%= link_to 'Edit Profile ', edit_user_registration_path,class:"dropdown-item my-1 me-auto" %>

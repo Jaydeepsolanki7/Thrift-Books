@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-md-5 mx-auto">
+    <div class="mt-5">
+      <h1>Edit Book</h1>
+      <%= form_with(model: @book, url: category_books_path) do |form| %>
+        <div class="field">
+          <%= form.label :title %><br>
+          <%= form.text_field :title, class:"form-control" %>
+        </div>
+
+        <div class="field">
+          <%= form.label :description %><br>
+          <%= form.text_area :description, class:"form-control" %>
+        </div>
+
+        <div class="field">
+          <%= form.label :price %>
+          <%= form.text_field :price, class:"form-control" %>
+        </div>
+
+        <div class="field">
+          <%= form.label :cover_image %>
+          <%= form.file_field :cover_image, class:"form-control" %>
+        </div>
+
+        <div>
+          <%= form.label :availability %>
+          <%= form.check_box :availability, as: :boolean, label: "availability", class:"ms-3 mt-3 mb-3 " %>
+        </div>
+
+
+        <div class="field">
+          <%= form.label :rating %>
+          <%= form.text_field :rating, class:"form-control" %>
+        </div>
+
+        <div class="field">
+          <%= form.label :quantity %>
+          <%= form.text_field :quantity, class:"form-control"%>
+        </div>
+
+        <div class="field d-grid ">
+          <%= form.submit class:"btn btn-success mt-2" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

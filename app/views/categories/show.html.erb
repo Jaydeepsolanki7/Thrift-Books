@@ -1,15 +1,18 @@
-<div class="row ms-5">
+<div class="row ms-5 mt-3">
   <div class="col-lg-12">
     <h1 class="mt-4 mb-4 text-center"><%= @category.name%> Books</h1>
-
     <div class="row">
       <% @books.each do |book| %>
-        <div class="card shadow me-2" style="width: 12rem; height: 18rem; ">
-        <img src="https://www.snapdeal.com/product/the-psychology-of-money-timeless/664769810416" class="card-img-top" alt="...">
-          <div class="my-auto mb-5 mx-auto">
-            <div card="card-body my-auto mb-5 mx-auto">
-              <h4 class="card-title"><%= book.title %></h4>
-              <%= link_to "View Details", "#", class:"btn btn-outline-success mb-1"%>
+        <div class="card shadow me-2 mb-2" style="width: 15rem; height: 24rem; ">
+          <div class="my-auto mx-auto ms-auto">
+            <% if book.cover_image.attached? %>
+              <center><%= image_tag book.cover_image, height:200, width:150 %></center>
+            <% end %>
+            <div card="card-body">
+                <strong class="card-title ms-3 mt-3"><%= book.title %></strong>
+              <div>
+                <center><%= link_to "View Details",category_book_path(@category, book), class:"btn btn-outline-success mt-3"%><center>
+              </div>
             </div>
           </div>
         </div>
@@ -17,3 +20,11 @@
     </div>
   </div>
 </div>
+
+<% if user_signed_in? && current_user.has_role?(:author) %>
+  <div class="row mt-5">
+    <div class="col-md-3 ms-auto">
+      <%= link_to "create new book", new_category_book_path(@category), class:"btn btn-outline-dark" %>
+    </div>
+  </div>
+<% end %>
