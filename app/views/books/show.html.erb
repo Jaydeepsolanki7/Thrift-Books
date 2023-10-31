@@ -1,5 +1,5 @@
 
-<div class="card shadow border border-0 mt-4" style="width: 80rem; height: 37rem;">
+<div class="card shadow border border-0 mt-4" style="width: 80rem; height: 40rem;">
   <div class="row">
     <div class="col-md-6 mt-3">
         <%= image_tag @book.cover_image, height:558, width:470 %>
@@ -22,7 +22,7 @@
             </div>
           <% else %>
             <div class="d-grid">
-              <%= link_to "Buy-Now", "#", class:"btn btn-outline-danger lg-3 mt-3" %>
+              <%= link_to "Buy-Now", new_checkout_path(book_id: @book.id), class:"btn btn-outline-danger lg-3 mt-3" %>
             <div>
           <% end %>
         <p class="card-text"><small class="text-muted"> </small></p>

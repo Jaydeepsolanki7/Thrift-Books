@@ -8,4 +8,10 @@ Rails.application.routes.draw do
       get 'search', on: :member
     end
   end
+
+  resources :checkout, only: [:new] do
+    post 'create', on: :collection
+    get 'success', on: :member
+    get 'cancel', on: :member
+  end
 end

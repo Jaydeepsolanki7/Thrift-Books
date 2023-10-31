@@ -1,0 +1,14 @@
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+  const stripe = Stripe('pk_test_51O57SVBNTM37rp88fhbCt9PP9VpXZ1lFrvltVsMhLM3JqVVtoUJL6ITZYDaIW6uP2HdGZlRkxb4KXCgWdoPotjVF00XI0N3NeL');
+
+  document.getElementById('checkout-button').addEventListener('click', function() {
+    fetch('/checkout/create', {
+      method: 'POST',
+    })
+    .then(response => response.json())
+    .then(data => {
+      stripe.redirectToCheckout({ sessionId: data.id });
+    });
+  });
+</script>
