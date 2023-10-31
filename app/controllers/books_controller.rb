@@ -1,5 +1,6 @@
 class BooksController < ApplicationController
-  before_action :authenticate_author!, only: [:new, :create]
+  before_action :authenticate_author!, only: [:new, :create, :edit, :update]
+
   def index
     @books = Book.all
   end
@@ -27,8 +28,12 @@ class BooksController < ApplicationController
   end
 
   def edit
-    @category = Category.find_by(id: params[:category_id])
     @book = Book.find(params[:id])
+    @category = Category.find_by(id: params[:category_id])
+    unless @book.author_id==current_user.id
+      flash[:danger] = "You are not a author of this book"
+      redirect_to category_book_path(@book)
+    end
   end
 
   def update
@@ -42,6 +47,13 @@ class BooksController < ApplicationController
         end
       end
     end
+  end
+
+  def search
+    debugger
+    @category = Category.find(params[:category_id])
+    @query = params[:q]
+    @books = @category.books.where('title LIKE ?', "%#{@query}%")
   end
 
   private

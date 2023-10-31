@@ -1,0 +1,11 @@
+<h1>Search Results for "<%= @query %>"</h1>
+
+<% if @books.any? %>
+  <ul>
+    <% @books.each do |book| %>
+      <li><%= link_to book.title, book %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No results found.</p>
+<% end %>

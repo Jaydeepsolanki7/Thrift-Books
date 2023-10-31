@@ -3,14 +3,14 @@
     <div class="mt-5">
       <h1>Edit Book</h1>
       <%= form_with model: @book, url: category_book_path(@category) do |form| %>
-        <div class="field">
+        <div class="field mt-4">
           <%= form.label :title %><br>
           <%= form.text_field :title, class:"form-control" %>
         </div>
 
         <div class="field">
           <%= form.label :description %><br>
-          <%= form.text_area :description, class:"form-control" %>
+          <%= form.text_area :description, size: "200x8" , class:"form-control" %>
         </div>
 
         <div class="field">

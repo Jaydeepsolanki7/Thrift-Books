@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   devise_for :users
   root "categories#index"
   resources :categories do
-    resources :books
+    resources :books do
+      get 'search', on: :member
+    end
   end
 end
