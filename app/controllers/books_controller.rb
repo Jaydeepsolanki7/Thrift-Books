@@ -50,11 +50,10 @@ class BooksController < ApplicationController
   end
 
   def search
-    debugger
-    @category = Category.find(params[:category_id])
     @query = params[:q]
-    @books = @category.books.where('title LIKE ?', "%#{@query}%")
+    @books = Book.where('title LIKE ?', "%#{@query}%")
   end
+  
 
   private
 

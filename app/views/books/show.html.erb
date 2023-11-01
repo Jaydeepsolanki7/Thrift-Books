@@ -13,17 +13,17 @@
 
         <p class="card-text"><strong>Description: </strong> <%= @book.description %></p>
           <% if current_user.nil?%>
-            <div class="d-grid gap-2">
-              <%= link_to "Buy-Now", "#", class:"btn btn-outline-danger" %>
-            </div>
+            <center>
+              <%= button_to "Buy-Now", checkout_create_path, params: {id: @book.id}, class:"btn btn-outline-danger btn-lg btn-block mt-3",  data: { turbo: false }  %>
+            </center>
           <% elsif current_user.id == @book.author_id %>
             <div class="d-grid gap-2">
               <%= link_to "Edit", edit_category_book_path, class:"btn btn-outline-warning" %>
             </div>
           <% else %>
-            <div class="d-grid">
-              <%= link_to "Buy-Now", new_checkout_path(book_id: @book.id), class:"btn btn-outline-danger lg-3 mt-3" %>
-            <div>
+            <center>
+            <%= button_to "Buy-Now", checkout_create_path, params: {id: @book.id}, class:"btn btn-outline-danger btn-lg btn-block mt-3",  data: { turbo: false }  %>
+            </center>
           <% end %>
         <p class="card-text"><small class="text-muted"> </small></p>
       </div>

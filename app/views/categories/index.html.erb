@@ -7,7 +7,7 @@
         <div class="card shadow me-2" style="width: 18rem; height: 18rem; ">
           <div class="my-auto mb-5 mx-auto">
             <% if category.cat_image.attached? %>
-              <center><%= image_tag category.cat_image, class: "card-img-top", height:170, width:120 %></center>
+              <center><%= image_tag category.cat_image, class: "card-img-top mt-2", height:170, width:120 %></center>
             <% end %>
             <div card="card-body">
               <div class="text-center mt-1"><h4 class="card-title"><i><%= category.name%></i></h4></div>
