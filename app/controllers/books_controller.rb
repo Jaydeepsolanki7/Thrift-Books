@@ -14,16 +14,12 @@ class BooksController < ApplicationController
   end
 
   def create
-    if current_user.has_role? :author
-      @book = current_user.books.new(book_params)
-      @book.category_id = params[:category_id]
-      if @book.save
-        redirect_to category_path(@book.category_id), notice: 'Book was successfully created.'
-      else
-        render :new
-      end
+    @book = current_user.books.new(book_params)
+    @book.category_id = params[:category_id]
+    if @book.save
+      redirect_to category_path(@book.category_id), notice: 'Book was successfully created.'
     else
-      redirect_to root_path, alert: 'You do not have the required role to create a book.'
+      render :new
     end
   end
 
@@ -37,14 +33,12 @@ class BooksController < ApplicationController
   end
 
   def update
-    if current_user.has_role? :author
-      @book = Book.find(params[:id])
-      if (@book.author_id==current_user.id)
-        if @book.update(book_params)
-          redirect_to category_path(@book.category_id), notice: 'Book was successfully edit.'
-        else
-          render :edit
-        end
+    @book = Book.find(params[:id])
+    if (@book.author_id==current_user.id)
+      if @book.update(book_params)
+        redirect_to category_path(@book.category_id), notice: 'Book was successfully edit.'
+      else
+        render :edit
       end
     end
   end

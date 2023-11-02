@@ -7,8 +7,5 @@ Rails.application.routes.draw do
     end
   end
   get '/search_books', to: 'books#search', as: 'search_books'
-
-
-
   post "checkout/create", to: "checkout#create"
 end
