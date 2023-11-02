@@ -1,5 +1,5 @@
 class BooksController < ApplicationController
-  before_action :authenticate_author!, only: [:new, :create, :edit, :update]
+  before_action :author?, only: [:new, :create, :edit, :update]
 
   def index
     @books = Book.all

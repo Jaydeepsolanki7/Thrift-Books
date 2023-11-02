@@ -11,4 +11,8 @@ class Role < ApplicationRecord
             :allow_nil => true
 
   scopify
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["created_at", "id", "id_value", "name", "resource_id", "resource_type", "updated_at"]
+  end
 end
