@@ -4,7 +4,6 @@
   <% if @books.any? %>
     <% @books.each do |book| %>
       <div class="col-md-3">
-        <!-- <h3 class="d-grid gap-2"><%= link_to book.title, category_book_path(book.category_id, book), class:"searched btn btn-outline-warning btn-lg btn-block " %></h3> -->
         <div class="card my-3" style="width:250px; height:400">
           <a href=<%= category_book_path(book.category, book)%> class="mx-auto">
               <%= image_tag rails_blob_path(book.cover_image, only_path: true), height:250, width: 200,  class: "my-2"%>

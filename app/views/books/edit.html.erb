@@ -23,6 +23,16 @@
           <%= form.file_field :cover_image, class:"form-control" %>
         </div>
 
+        <div class="field">
+          <% if @book.pages.attached? %>
+            <% @book.pages.each do |page| %>
+              <%= form.hidden_field :pages, multiple: true, value: page.signed_id %>
+              <%= image_tag(page, height: 100, width:100)%>
+            <% end %>
+          <% end %>
+          <%= form.file_field :pages, multiple: true, class: "form-control" %>
+        </div>
+
         <div>
           <%= form.label :availability %>
           <%= form.check_box :availability, as: :boolean, label: "availability", class:"ms-3 mt-3 mb-3 " %>

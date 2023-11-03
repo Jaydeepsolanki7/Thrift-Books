@@ -13,6 +13,12 @@
           <%= form.text_area :description, class:"form-control" %>
         </div>
 
+        <% @book.pages.each do |page| %>
+          <%= form.hidden_field :pages, multiple: true, value: page.signed_id %>
+        <% end %>
+
+        <%= form.file_field :pages, multiple: true %>
+
         <div class="field">
           <%= form.label :price %>
           <%= form.text_field :price, class:"form-control" %>

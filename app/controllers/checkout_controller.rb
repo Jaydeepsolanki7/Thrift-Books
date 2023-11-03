@@ -17,7 +17,7 @@ class CheckoutController < ApplicationController
           quantity: 1,
         }],
         mode: 'payment',
-        success_url: root_url,
+        success_url: "#{root_url}/checkout/success",
         cancel_url: root_url,
       )
 
@@ -27,4 +27,6 @@ class CheckoutController < ApplicationController
       e.class 
     end
   end
+
+  def success; end
 end

@@ -9,4 +9,5 @@ Rails.application.routes.draw do
   end
   get '/search_books', to: 'books#search', as: 'search_books'
   post "checkout/create", to: "checkout#create"
+  get "checkout/success", to: "checkout#success"
 end

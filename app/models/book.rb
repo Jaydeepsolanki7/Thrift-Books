@@ -2,6 +2,7 @@ class Book < ApplicationRecord
   belongs_to :author, class_name: 'User'
   belongs_to :category
   has_one_attached :cover_image
+  has_many_attached :pages
 
 
   def self.ransackable_attributes(auth_object = nil)
