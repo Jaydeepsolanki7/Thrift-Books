@@ -5,9 +5,13 @@ Rails.application.routes.draw do
   root "categories#index"
   resources :categories do
     resources :books do
+      resources :reviews, only: [:new, :create] do
+        
+      end
     end
   end
   get '/search_books', to: 'books#search', as: 'search_books'
   post "checkout/create", to: "checkout#create"
   get "checkout/success", to: "checkout#success"
 end
+

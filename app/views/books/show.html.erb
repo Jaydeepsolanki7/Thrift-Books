@@ -58,7 +58,28 @@
     <div class="vl"></div>
   </div>
   <div class="col-md-5">
-      <div><h1 class="mt-5">Hello</h1></div>
+    <div><h3 class="mt-5">All Reviews</h3></div>
+    <%= render @book.reviews %>
+    <hr>
+    <h3>Add Review</h3>
+    <%= form_with(model: [@category, @book, Review.new], url: category_book_reviews_path(@book.category_id, @book)) do |form| %>
+    <% if user_signed_in? %>
+      <div class="field">
+        <%= form.hidden_field :user_id, value: current_user.id %>
+      </div>
+    <% end %>
+      <div class="field">
+        <%= form.hidden_field :book_id, value: @book.id %>
+      </div>
+      <div class="field">
+        <%= form.label :body %>
+        <%= form.text_field :body, class:'form-control' %>
+      </div>
+
+      <div class="actions text-center">
+        <%= form.submit class:"btn btn-success mt-2" %>
+      </div>
+    <% end %>   
   </div>
 </div>
 <% end %>
