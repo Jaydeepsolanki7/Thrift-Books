@@ -1,10 +1,10 @@
-<div class="card shadow border border-0 mt-4" style="width: 80rem; height: 40rem;">
+<div class="card shadow border border-0 mt-4" style="width: 70rem; height: 40rem;">
   <div class="row">
-    <div class="col-md-6 mt-3">
-        <%= image_tag @book.cover_image, height:558, width:470 %>
+    <div class="col-md-6">
+        <div class="mt-2 zoom"><%= image_tag @book.cover_image, height:558, width:470 %></div>
     </div>
     <div class="col-md-6">
-      <div class="card-body">
+      <div class="card-body ">
         <h4 class="card-title bg-dark text-light text-center"><%= @book.title %></h4>
         <h5 class="card-title">price: <%= @book.price %></h5>
         <h6 class="card-text badge rounded-pill bg-dark">rating: <%= @book.rating %></h6>
@@ -30,17 +30,17 @@
   </div>
 </div>
 <hr>
-<div class="mt-5">
+<div class="mt-5 bg-dark text-light">
   <h1 style=text-align:center>Overview</h1>
 </div>
 <div class="row mt-2">
-  <div class="col-md-6">
-  <% if @book.pages.attached? %>
+  <div class="col-md-6 ">
+    <% if @book.pages.attached? %>
     <div id="carouselExample" class="carousel slide">
         <div class="carousel-inner" >
           <% @book.pages.each do |page| %>
           <div class="carousel-item active">
-            <%= image_tag rails_blob_path(page, only_path: true), class: "ms-4 mb-4", height:557, width:456%>
+            <%= image_tag rails_blob_path(page, only_path: true), class: "mb-4 page_margin", height:700, width:456%>
           </div>
         <% end %>
       </div>
@@ -54,6 +54,11 @@
       </button>
     </div>
   </div>
+  <div class="col-md-1">
+    <div class="vl"></div>
+  </div>
+  <div class="col-md-5">
+      <div><h1 class="mt-5">Hello</h1></div>
+  </div>
 </div>
-
 <% end %>

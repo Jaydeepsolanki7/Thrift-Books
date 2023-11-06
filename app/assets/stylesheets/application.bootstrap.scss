@@ -4,3 +4,27 @@
 .searched{
   text-decoration: none;
 }
+.page_margin{
+  margin-left: 2.7rem !important;;
+}
+.vl {
+  border-left: 1px solid rgb(21, 21, 21);
+  height: 700px;
+}
+.carousel-control-prev, .carousel-control-next {
+  color: brown !important;;
+}
+.category_show{
+  margin-left: 5.3rem !important;;
+}
+.zoom {
+  transition: transform 0.2s;
+
+  margin: 0 auto;
+}
+
+.zoom:hover {
+  -ms-transform: scale(1.5); /* IE 9 */
+  -webkit-transform: scale(1.5); /* Safari 3-8 */
+  transform: scale(1.5); 
+}

@@ -2,9 +2,9 @@
   <div class="col-md-16 my-3">
     <h1 class=" mt-4 mb-4 text-center"><span class="badge rounded-pill bg-dark">CATEGORIES</span></h1>
 
-    <div class="row my-4">
+    <div class="row ms-2">
       <% @categories.each do |category| %>
-        <div class="card shadow me-2" style="width: 18rem; height: 18rem; ">
+        <div class="card shadow me-2 mt-2" style="width: 15rem; height: 18rem; ">
           <div class="my-auto mb-5 mx-auto">
             <% if category.cat_image.attached? %>
               <center><%= image_tag category.cat_image, class: "card-img-top mt-2", height:170, width:120 %></center>
