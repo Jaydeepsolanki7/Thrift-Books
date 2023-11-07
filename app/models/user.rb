@@ -8,6 +8,19 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
 
+  after_create :create_stripe_customer
+
+  def create_stripe_customer
+    begin
+      customer = Stripe::Customer.create({
+        email: email,
+        name: name,
+      })
+
+      update(stripe_customer_id: customer.id)
+    end
+  end
+
 
   def assign_default_role
     self.add_role(:user) if self.roles.blank?
