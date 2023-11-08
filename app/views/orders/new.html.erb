@@ -1,0 +1,27 @@
+<%= form_with model: @order  do |form| %>
+  <div class="field">
+    <%= form.hidden_field :book_id, value: params[:id]  %>
+  </div>
+  <div class="row mt-3">
+    <div class="col-md-12">
+      <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+          <div class="col-md-4 mt-4">
+            <% if @book.cover_image.attached? %>
+              <center><%= image_tag @book.cover_image, height:176, width:179 %></center>
+            <% end %>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title"><%=@book.title%></h5>
+              <p class="lead"><%= truncate(@book.description, length: 100) %></p>
+              <%= link_to "#", class:"btn btn-danger"%>
+              <p class="card-text"><small class="text-muted">"fhg</small></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% end %>

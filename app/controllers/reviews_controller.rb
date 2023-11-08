@@ -21,6 +21,7 @@ class ReviewsController < ApplicationController
         redirect_to category_book_path(@category, @book)
         flash[:success] = "review is created"
       else
+        redirect_to request.referer
         flash[:danger] = "You are the author of the book"
       end
     else

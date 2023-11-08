@@ -8,12 +8,12 @@
         <h4 class="card-title bg-dark text-light text-center"><%= @book.title %></h4>
         <h5 class="card-title">price: <%= @book.price %></h5>
         <h6 class="card-text badge rounded-pill bg-dark">rating: <%= @book.rating %></h6>
-
+        <h6 class="card-text badge rounded-pill bg-dark">remaining-books: <%= @book.remaining_books %></h6>
 
         <p class="card-text"><strong>Description: </strong> <%= @book.description %></p>
           <% if current_user.nil?%>
             <center>
-              <%= button_to "Buy-Now", checkout_create_path, params: {id: @book.id}, class:"btn btn-outline-danger btn-lg btn-block mt-3",  data: { turbo: false }  %>
+              <%= button_to "Buy-Now", new_order_path, params: {id: @book.id}, class:"btn btn-outline-danger btn-lg btn-block mt-3",  data: { turbo: false }  %>
             </center>
           <% elsif current_user.id == @book.author_id %>
             <div class="d-grid gap-2">
@@ -21,7 +21,7 @@
             </div>
           <% else %>
             <center>
-            <%= button_to "Buy-Now", checkout_create_path, params: {id: @book.id}, class:"btn btn-outline-danger btn-lg btn-block mt-3",  data: { turbo: false }  %>
+            <%= button_to "Buy-Now", new_order_path, params: {book_id: @book.id}, method: :get, class:"btn btn-outline-danger btn-lg btn-block mt-3" %>
             </center>
           <% end %>
         <p class="card-text"><small class="text-muted"> </small></p>

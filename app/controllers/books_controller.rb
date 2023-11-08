@@ -17,7 +17,8 @@ class BooksController < ApplicationController
     @book = current_user.books.new(book_params)
     @book.category_id = params[:category_id]
     if @book.save
-      redirect_to category_path(@book.category_id), notice: 'Book was successfully created.'
+      redirect_to category_path(@book.category_id)
+      flash[:success] = 'Book was successfully created.'
     else
       render :new
     end
@@ -36,7 +37,9 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     if (@book.author_id==current_user.id)
       if @book.update(book_params)
-        redirect_to category_path(@book.category_id), notice: 'Book was successfully edit.'
+        redirect_to category_path(@book.category_id)
+        flash[:success] = 'Book was successfully edited.'
+
       else
         render :edit
       end
@@ -52,6 +55,6 @@ class BooksController < ApplicationController
   private
 
     def book_params
-      params.require(:book).permit(:title, :description, :price, :cover_image, :availability, :rating, :quantity, pages: [])
+      params.require(:book).permit(:title, :description, :price, :cover_image, :availability, :rating, :remaining_books, :quantity, pages: [])
     end
 end

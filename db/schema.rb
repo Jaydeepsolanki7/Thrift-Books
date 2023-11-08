@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_07_093600) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_08_101513) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -39,6 +39,16 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_07_093600) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "book_orders", force: :cascade do |t|
+    t.integer "book_id", null: false
+    t.integer "order_id", null: false
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_book_orders_on_book_id"
+    t.index ["order_id"], name: "index_book_orders_on_order_id"
+  end
+
   create_table "books", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -51,6 +61,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_07_093600) do
     t.integer "category_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "remaining_books"
     t.index ["author_id"], name: "index_books_on_author_id"
     t.index ["category_id"], name: "index_books_on_category_id"
   end
@@ -60,6 +71,14 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_07_093600) do
     t.string "cat_image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -111,8 +130,11 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_07_093600) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "book_orders", "books"
+  add_foreign_key "book_orders", "orders"
   add_foreign_key "books", "categories"
   add_foreign_key "books", "users", column: "author_id"
+  add_foreign_key "orders", "users"
   add_foreign_key "reviews", "books"
   add_foreign_key "reviews", "users"
 end

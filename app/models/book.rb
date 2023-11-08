@@ -4,6 +4,8 @@ class Book < ApplicationRecord
   has_many :reviews
   has_one_attached :cover_image
   has_many_attached :pages
+  has_many :book_orders
+  has_many :orders, through: :book_orders
 
 
   def self.ransackable_attributes(auth_object = nil)

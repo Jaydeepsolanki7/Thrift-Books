@@ -5,11 +5,12 @@ Rails.application.routes.draw do
   root "categories#index"
   resources :categories do
     resources :books do
-      resources :reviews, only: [:new, :create] do
-        
+      resources :reviews, only: [:new, :create] do  
       end
     end
   end
+  resources :orders, only:[:new, :create, :index, :show]
+  get 'create_checkout_session/:book_id', to: 'orders#create_checkout_session', as: 'create_checkout_session'
   get '/search_books', to: 'books#search', as: 'search_books'
   post "checkout/create", to: "checkout#create"
   get "checkout/success", to: "checkout#success"
