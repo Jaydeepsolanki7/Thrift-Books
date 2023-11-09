@@ -1,2 +1,7 @@
-<h1>Orders#index</h1>
-<p>Find me in app/views/orders/index.html.erb</p>
+<h1>All Orders</h1>
+
+<ul>
+  <% @orders.each do |order| %>
+    <li><%= link_to order.id, order %> - <%= order.status %> - <%= order.user.name %> </li>
+  <% end %>
+</ul>

@@ -1,27 +1,57 @@
-<%= form_with model: @order  do |form| %>
+<%= form_with model: @order,method: :post, data: {turbo:false} do |form|%>
   <div class="field">
-    <%= form.hidden_field :book_id, value: params[:id]  %>
+    <%= form.hidden_field :book_id, value: params[:book_id]  %>
   </div>
   <div class="row mt-3">
     <div class="col-md-12">
-      <div class="card mb-3" style="max-width: 540px;">
-        <div class="row g-0">
-          <div class="col-md-4 mt-4">
-            <% if @book.cover_image.attached? %>
-              <center><%= image_tag @book.cover_image, height:176, width:179 %></center>
-            <% end %>
+      <div class="card mb-3" style="max-width: 840px; height:15rem;">
+        <div class="row">
+          <div class="col-md-4 mt-2 ">
           </div>
           <div class="col-md-8">
             <div class="card-body">
               <h5 class="card-title"><%=@book.title%></h5>
               <p class="lead"><%= truncate(@book.description, length: 100) %></p>
-              <%= link_to "#", class:"btn btn-danger"%>
-              <p class="card-text"><small class="text-muted">"fhg</small></p>
+              <div class="actions">
+                <%= form.submit 'Place Order' %>
+              </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
   </div>
 
 <% end %>
+
+
+<%= form_with model: @order, id: 'payment-form' do |form| %>
+  <!-- Your form fields -->
+
+  <div class="field">
+    <%= form.fields_for :book_orders do |book_order_form| %>
+      <div class="nested-fields">
+        <%= book_order_form.collection_select :book_id, @books, :id, :title, prompt: 'Select a book' %>
+        <%= book_order_form.number_field :quantity, in: 1..20 %>
+      </div>
+    <% end %>
+
+    <%= link_to 'Add Book', '#', class: 'add-book-order', data: { association: 'book_orders', content: 'nested-fields' } %>
+  </div>
+
+  <div class="field">
+    <label for="card-element">
+      Credit or debit card
+    </label>
+    <div id="card-element">
+      <!-- A Stripe Element will be inserted here. -->
+    </div>
+
+    <!-- Used to display form errors. -->
+    <div id="card-errors" role="alert"></div>
+  </div>
+
+  <button>Submit Payment</button>
+<% end %>
+

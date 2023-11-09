@@ -1,0 +1,15 @@
+<h1>Order Details</h1>
+
+<p><strong>Order ID:</strong> <%= @order.id %></p>
+<p><strong>Status:</strong> <%= @order.status %></p>
+
+<h2>Book Orders</h2>
+
+<ul>
+  <% @order.book_orders.each do |book_order| %>
+    <li>
+      <p><strong>Book Title:</strong> <%= book_order.book.title %></p>
+      <p><strong>Quantity:</strong> <%= book_order.quantity %></p>
+    </li>
+  <% end %>
+</ul>

@@ -10,7 +10,7 @@ class CheckoutController < ApplicationController
         payment_method_types: ['card'],
         line_items: [{
           price_data: {
-            currency: 'usd',
+            currency: 'inr',
             product_data: {
               name: @book.title,
             },
