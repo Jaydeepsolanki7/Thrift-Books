@@ -78,3 +78,55 @@ successful  <div class="field">
 
   <button>Submit Payment</button>
 <% end %>
+
+
+class BookOrdersController < ApplicationController
+  def create
+    @order = current_user.orders.last || current_user.orders.create
+    @book = Book.find(params[:book_id])
+    @order.books << @book unless @order.books.include?(@book)
+
+    redirect_to @order, notice: 'Book added to cart.'
+  end
+
+  def destroy
+    @order = current_user.orders.find(params[:order_id])
+    @book_order = @order.book_orders.find(params[:id])
+    @book_order.destroy
+
+    redirect_to @order, notice: 'Book removed from cart.'
+  end
+end
+    if @order.save
+      session = Stripe::Checkout::Session.create(
+        payment_method_types: ['card'],
+        line_items: [{
+          price_data: {
+            currency: 'usd',
+            product_data: {
+              name:"BOOK",
+            },
+            unit_amount: 5000,
+          },
+          quantity: 1,
+        }],
+        success_url: order_url(@order),
+        cancel_url: orders_url,
+      )
+
+      @order.update(checkout_session_id: session.id)
+
+      redirect_to session.url, notice: 'Order was successfully created.'
+    else
+      render :new
+    end
+
+              <div class="field">
+            <%= book_order_form.label :book %><br>
+            <%= book_order_form.collection_select :book_id, @books, :id, :title, prompt: 'Select a book', class:"form-control" %>
+          </div>
+
+          <div class="field">
+            <%= book_order_form.label :quantity %>
+            <%= book_order_form.number_field :quantity, class:"form-control"  %>
+          </div>

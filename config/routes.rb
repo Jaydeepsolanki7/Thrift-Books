@@ -9,7 +9,13 @@ Rails.application.routes.draw do
       end
     end
   end
-  resources :orders, only:[:new, :create, :index, :show]
+  resources :orders, only: [:index, :show, :new, :create] do
+    member do
+      post 'add_to_cart/:book_id', to: 'orders#add_to_cart', as: 'add_to_cart'
+    end
+  end
+
+  resources :book_orders, only: [:create, :destroy]
 
   get '/search_books', to: 'books#search', as: 'search_books'
   get "order/success", to: "order#success"

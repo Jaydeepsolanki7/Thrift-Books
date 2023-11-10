@@ -12,7 +12,7 @@
                 <center><strong class="card-title ms-3 mt-3"><%= book.title %></strong></center>
                 <center><strong class="badge rounded-pill bg-dark ">Price: <%= book.price %></strong></center>
               <div>
-                <center><%= link_to "View Details",category_book_path(@category, book), class:"btn btn-outline-success mt-3"%><center>
+                <center><%= link_to "View Details",category_book_path(@category, book), params:{book_id: book.id}, class:"btn btn-outline-success mt-3"%><center>
               </div>
             </div>
           </div>

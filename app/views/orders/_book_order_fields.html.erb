@@ -1,0 +1,14 @@
+<div class="nested-fields">
+  <div class="field">
+    <%= book_order_form.label :book %><br>
+    <%= book_order_form.collection_select :book_id, @books, :id, :title, prompt: 'Select a book', class:"form-control" %>
+  </div>
+
+  <div class="field">
+    <%= book_order_form.label :quantity %>
+    <%= book_order_form.number_field :quantity, class:"form-control"  %>
+  </div>
+
+  <%= book_order_form.check_box :_destroy %>
+  <%= book_order_form.label :_destroy, 'Remove Task' %>
+</div>

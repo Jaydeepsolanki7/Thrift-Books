@@ -1,4 +1,16 @@
+<div class="row">
+  <div class="col-md-3">
+    <%= form_with model: @order do |form| %>
 
+      <%= form.fields_for :book_orders do |book_order_form| %>
+        <%= render partial: 'book_order_fields', locals: { book_order_form: book_order_form } %>
+      <% end %>
 
+      <div class="links" id="book-orders">
+        <%= link_to 'Add Book', '#', class: 'btn btn-primary', id: 'add-book-order' %>
+      </div>
 
-
+      <%= form.submit "Create Order", class: "btn btn-primary", id: 'submit-button mt-2' %>
+    <% end %>
+  </div>
+</div>

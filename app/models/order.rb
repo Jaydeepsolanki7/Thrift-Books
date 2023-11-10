@@ -1,7 +1,7 @@
 class Order < ApplicationRecord
   belongs_to :user
   enum :status, [:pending, :shipped, :being_packed, :complete, :cancelled]
-  has_many :book_orders
+  has_many :book_orders, dependent: :destroy
   has_many :books, through: :book_orders
   accepts_nested_attributes_for :book_orders, reject_if: :all_blank, allow_destroy: true
 

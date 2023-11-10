@@ -21,7 +21,7 @@
             </div>
           <% else %>
             <center>
-            <%= button_to "Buy-Now", new_order_path, params: {book_id: @book.id}, method: :get, class:"btn btn-outline-danger btn-lg btn-block mt-3" %>
+            <%= link_to "Add to Cart", "3", method: :post, class: "btn btn-primary" %>
             </center>
           <% end %>
         <p class="card-text"><small class="text-muted"> </small></p>
