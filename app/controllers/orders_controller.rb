@@ -14,7 +14,6 @@ class OrdersController < ApplicationController
   end
 
   def create
-    debugger
     @order = current_user.orders.build(order_params)
     @order.save
     redirect_to @order 
