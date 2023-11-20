@@ -1,91 +1,88 @@
 <div class="card shadow border border-0" style="width: 70rem; height: 40rem;">
-<div class="card shadow border border-0 mt-4">
-  <div class="row">
-    <div class="col-md-6">
+  <div class="card shadow border border-0 mt-4">
+    <div class="row">
+      <div class="col-md-6">
         <div class="mt-2 zoom"><%= image_tag @book.cover_image, height:558, width:470 %></div>
-    </div>
-    <div class="col-md-6">
-      <div class="card-body ">
-        <h4 class="card-title bg-dark text-light text-center"><%= @book.title %></h4>
-        <h5 class="card-title">price: <%= @book.price %></h5>
-        <h6 class="card-text badge rounded-pill bg-dark">rating: <%= @book.rating %></h6>
-        <h6 class="card-text badge rounded-pill bg-dark">remaining-books: <%= @book.remaining_books %></h6>
+      </div>
+        <div class="col-md-6">
+          <div class="card-body ">
+            <h4 class="card-title bg-dark text-light text-center"><%= @book.title %></h4>
+            <h5 class="card-title">price: <%= @book.price %></h5>
+            <h6 class="card-text badge rounded-pill bg-dark">rating: <%= @book.rating %></h6>
+            <h6 class="card-text badge rounded-pill bg-dark">remaining-books: <%= @book.remaining_books %></h6>
 
-        <p class="card-text"><strong>Description: </strong> <%= @book.description %></p>
-          <% if current_user.nil?%>
-          <div class="d-flex ordering">
-              <%= link_to "Add to Cart", "#", method: :post, class: "btn btn-outline-warning btn-lg btn-block mt-3 me-3" %>
-              <%= button_to "Buy-Now",create_order_path(id: @book.id), class:"btn btn-outline-danger btn-lg btn-block mt-3",  data: { turbo: false }  %>
+            <p class="card-text"><strong>Description: </strong> <%= @book.description %></p>
+            <% if current_user.nil?%>
+              <div class="d-flex ordering">
+                <%= link_to "Add to Order", "#", method: :post, class: "btn btn-outline-warning btn-lg btn-block mt-3 me-2" %>
+                <%= button_to "Buy-Now",create_order_path(id: @book.id), class:"btn btn-outline-danger btn-lg btn-block mt-3",  data: { turbo: false }  %>
+              </div>
+            <% elsif current_user.id == @book.author_id %>
+              <div class="d-grid gap-2">
+                <%= link_to "Edit", edit_category_book_path, class:"btn btn-outline-warning" %>
+              </div>
+            <% else %>
+              <div class="d-flex ordering">
+                <%= link_to "Add to Order", "#", method: :post, class: "btn btn-outline-warning btn-lg btn-block mt-3 me-2" %>
+                <%= button_to "Buy Now", create_order_path(id: @book.id), method: :post, class: "btn btn-outline-danger btn-lg btn-block mt-3", data: { turbo: false } %>
+              </div>
+            <% end %>
+            <p class="card-text"><small class="text-muted"> </small></p>
           </div>
-          <% elsif current_user.id == @book.author_id %>
-            <div class="d-grid gap-2">
-              <%= link_to "Edit", edit_category_book_path, class:"btn btn-outline-warning" %>
+        </div>
+      </div>
+    </div>
+    <hr>  
+  <div class="mt-5 bg-dark text-light">
+    <h1 style=text-align:center>Overview</h1>
+  </div>
+  <div class="row mt-2">
+    <div class="col-md-6 ">
+      <% if @book.pages.attached? %>
+      <div id="carouselExample" class="carousel slide">
+          <div class="carousel-inner" >
+            <% @book.pages.each do |page| %>
+            <div class="carousel-item active">
+              <%= image_tag rails_blob_path(page, only_path: true), class: "mb-4 page_margin", height:700, width:456%>
             </div>
-          <% else %>
-          <div class="d-flex ordering">
-          
-            <%= link_to "Add to Cart", "#", method: :post, class: "btn btn-outline-warning btn-lg btn-block mt-3 me-3" %>
-            <%= button_to "Buy Now", create_order_path(id: @book.id), method: :post, class: "btn btn-outline-danger btn-lg btn-block mt-3", data: { turbo: false } %>
-
-          
-          </div>
           <% end %>
-        <p class="card-text"><small class="text-muted"> </small></p>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
       </div>
     </div>
-  </div>
-</div>
-<hr>
-<div class="mt-5 bg-dark text-light">
-  <h1 style=text-align:center>Overview</h1>
-</div>
-<div class="row mt-2">
-  <div class="col-md-6 ">
-    <% if @book.pages.attached? %>
-    <div id="carouselExample" class="carousel slide">
-        <div class="carousel-inner" >
-          <% @book.pages.each do |page| %>
-          <div class="carousel-item active">
-            <%= image_tag rails_blob_path(page, only_path: true), class: "mb-4 page_margin", height:700, width:456%>
-          </div>
-        <% end %>
-      </div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="visually-hidden">Next</span>
-      </button>
+    <div class="col-md-1">
+      <div class="vl"></div>
     </div>
-  </div>
-  <div class="col-md-1">
-    <div class="vl"></div>
-  </div>
-  <div class="col-md-5">
-    <div><h3 class="mt-5">All Reviews</h3></div>
-    <%= render @book.reviews %>
-    <hr>
-    <h3>Add Review</h3>
-    <%= form_with(model: [@category, @book, Review.new], url: category_book_reviews_path(@book.category_id, @book)) do |form| %>
-    <% if user_signed_in? %>
-      <div class="field">
-        <%= form.hidden_field :user_id, value: current_user.id %>
-      </div>
-    <% end %>
-      <div class="field">
-        <%= form.hidden_field :book_id, value: @book.id %>
-      </div>
-      <div class="field">
-        <%= form.label :body %>
-        <%= form.text_field :body, class:'form-control' %>
-      </div>
+    <div class="col-md-5">
+      <div><h3 class="mt-5">All Reviews</h3></div>
+      <%= render @book.reviews %>
+      <hr>
+      <h3>Add Review</h3>
+      <%= form_with(model: [@category, @book, Review.new], url: category_book_reviews_path(@book.category_id, @book)) do |form| %>
+      <% if user_signed_in? %>
+        <div class="field">
+          <%= form.hidden_field :user_id, value: current_user.id %>
+        </div>
+      <% end %>
+        <div class="field">
+          <%= form.hidden_field :book_id, value: @book.id %>
+        </div>
+        <div class="field">
+          <%= form.label :body %>
+          <%= form.text_field :body, class:'form-control' %>
+        </div>
 
-      <div class="actions text-center">
-        <%= form.submit class:"btn btn-success mt-2" %>
-      </div>
-    <% end %>   
+        <div class="actions text-center">
+          <%= form.submit class:"btn btn-success mt-2" %>
+        </div>
+      <% end %>   
+    </div>
   </div>
-</div>
 <% end %>

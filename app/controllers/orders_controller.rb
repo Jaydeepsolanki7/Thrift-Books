@@ -45,7 +45,7 @@ class OrdersController < ApplicationController
         success_url: "#{root_url}orders",
         cancel_url: root_url,
       )
-
+      flash[:success] = "Order is completed"
       redirect_to session.url, allow_other_host: true
   
     rescue Exception => e
@@ -70,9 +70,13 @@ class OrdersController < ApplicationController
       session = event.data.object
       @user = session.metadata.user_id
       book_id = session.metadata.book_id
+      quantity = 1
+      @book = Book.find_by(book_id)
+      @book.decrement!(:remaining_books, quantity)
       @order = Order.create(user_id: @user.to_i)
       @order.book_orders.create(book_id: book_id, quantity: 1)
       OrderMailer.order_created_email(@order).deliver_now
+
     end
   end
   
