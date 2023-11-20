@@ -1,7 +1,26 @@
-<h1>All Orders</h1>
+<% if @orders.any? %>
+  <h1 style="text-align:center">My Orders</h1>
 
-<ul>
-  <% @orders.each do |order| %>
-    <li><%= link_to order.id, order %> - <%= order.status %> - <%= order.user.name %> </li>
-  <% end %>
-</ul>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Name</th>
+        <th scope="col">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @orders.each do |order| %>
+        <a href=<%= order %>>
+          <tr class="order-link">
+        <a href=<%= order %>><th scope="row" class="order-id-link"><%= link_to order.id, order %> </th></a>
+            <td style="text-decoration:none" class="order-name-link"><%= link_to order.user.name, order %></td>
+            <td  class="order-status-link"><%= link_to order.status, order%></td>
+          </tr>
+        </a>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <h2>You have ordered nothing</h2>
+<% end %>
