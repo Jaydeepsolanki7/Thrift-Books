@@ -72,6 +72,7 @@ class OrdersController < ApplicationController
       book_id = session.metadata.book_id
       @order = Order.create(user_id: @user.to_i)
       @order.book_orders.create(book_id: book_id, quantity: 1)
+      OrderMailer.order_created_email(@order).deliver_now
     end
   end
   
