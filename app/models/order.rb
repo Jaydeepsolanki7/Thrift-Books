@@ -9,4 +9,12 @@ class Order < ApplicationRecord
   def set_default_status
     self.status ||= :pending
   end
+
+  def self.ransackable_attributes(auth_object = nil)
+    ["created_at", "id", "id_value", "status", "updated_at", "user_id"]
+  end
+  
+  def self.ransackable_associations(auth_object = nil)
+    ["book_orders", "books", "user"]
+  end
 end
