@@ -21,7 +21,10 @@ class OrdersController < ApplicationController
 
   def create_order
     begin
+      
       @book = Book.find(params[:id])
+      quantity = params[:quantity].to_i
+
       session = Stripe::Checkout::Session.create(
         customer: current_user.stripe_customer_id,
         # client_reference_id: current_user.name,
@@ -29,7 +32,8 @@ class OrdersController < ApplicationController
         metadata: {
     
         book_id: @book.id,
-        user_id: current_user.id
+        user_id: current_user.id,
+        quantity: quantity
         },
         line_items: [{
           price_data: {
@@ -39,7 +43,7 @@ class OrdersController < ApplicationController
             },
             unit_amount: @book.price,
           },
-          quantity: 1,
+          quantity: quantity,
         }],
         mode: 'payment',
         success_url: "#{root_url}orders",
@@ -56,7 +60,7 @@ class OrdersController < ApplicationController
   def payment_completed
     payload= request.body.read
     event= nil
-    endpoint_secret= 'whsec_ETEKbnJX3ixLLLOxQnXeWhr4nxjD59uT'
+    endpoint_secret= 'whsec_1Cg3qDwDzNSimwiTEVRx9T8h2kLLXDm0'
     sig_header = request.env['HTTP_STRIPE_SIGNATURE']
     begin
       event = Stripe::Webhook.construct_event(payload, sig_header, endpoint_secret)
@@ -70,11 +74,11 @@ class OrdersController < ApplicationController
       session = event.data.object
       @user = session.metadata.user_id
       book_id = session.metadata.book_id
-      quantity = 1
+      quantity = session.metadata.quantity
       @book = Book.find_by(book_id)
       @book.decrement!(:remaining_books, quantity)
       @order = Order.create(user_id: @user.to_i)
-      @order.book_orders.create(book_id: book_id, quantity: 1)
+      @order.book_orders.create(book_id: book_id, quantity: quantity)
       OrderMailer.order_created_email(@order).deliver_now
 
     end

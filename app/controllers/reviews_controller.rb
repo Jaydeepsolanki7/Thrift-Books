@@ -29,7 +29,14 @@ class ReviewsController < ApplicationController
     end
   end
 
-
+  def destroy
+    @category = Category.find(params[:category_id])
+    @book = @category.books.find(params[:book_id])
+    @review = @book.reviews.find(params[:id])
+    @review.destroy
+    redirect_to category_book_path(@category, @book)
+  end
+  
   private
 
     def review_params

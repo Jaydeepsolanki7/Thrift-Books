@@ -5,8 +5,7 @@ Rails.application.routes.draw do
   root "categories#index"
   resources :categories do
     resources :books do
-      resources :reviews, only: [:new, :create] do  
-      end
+      resources :reviews, only: [:new, :create, :destroy]
     end
   end
   resources :orders, only: [:index, :show, :new, :create] do

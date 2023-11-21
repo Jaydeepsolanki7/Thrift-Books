@@ -4,5 +4,10 @@
   </div>
   <div class="card-body text-center mt-2 mb-2">
     <%= review.body %>
+    <% if current_user.email == review.user.email %>
+      <%= button_to category_book_review_path( book_id: @book, id: review.id), method: :delete, data: { turbo_confirm: "Are you sure?" } do %>
+        <i class="bi bi-trash"></i>
+      <% end %>
+    <% end %>
   </div>
 </div>

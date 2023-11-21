@@ -14,8 +14,10 @@
         <a href=<%= order %>>
           <tr class="order-link">
         <a href=<%= order %>><th scope="row" class="order-id-link"><%= link_to order.id, order %> </th></a>
-            <td style="text-decoration:none" class="order-name-link"><%= link_to order.user.name, order %></td>
-            <td  class="order-status-link"><%= link_to order.status, order%></td>
+          <% order.book_orders.each do |book_name| %>
+            <td><%= book_name.book.title %></td>
+          <% end %>
+          <td  class="order-status-link"><%= link_to order.status, order%></td>
           </tr>
         </a>
       <% end %>
