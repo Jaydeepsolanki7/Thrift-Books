@@ -6,7 +6,7 @@ class Book < ApplicationRecord
   has_many_attached :pages
   has_many :book_orders
   has_many :orders, through: :book_orders
-
+  validates :title, presence: true
 
   def self.ransackable_attributes(auth_object = nil)
     ["author_id", "availability", "category_id", "cover_image", "created_at", "description", "id", "id_value", "price", "quantity", "rating", "title", "updated_at"]

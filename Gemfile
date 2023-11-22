@@ -65,6 +65,8 @@ gem 'cocoon'
 gem 'rails-controller-testing'
 # 
 gem "faker"
+#
+gem 'shoulda-matchers'
 
 
 group :development, :test do
