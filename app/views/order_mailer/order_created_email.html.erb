@@ -1,0 +1,35 @@
+<!-- app/views/order_mailer/order_created_email.html.erb -->
+<h1>Your Order has been Created!</h1>
+
+<p>Dear <%= @order.user.name %>,</p>
+
+<p>Thank you for your order! Here are the details:</p>
+
+<table>
+  <tr>
+    <th>Order ID:</th>
+    <td><%= @order.id %></td>
+  </tr>
+  <tr>
+    <th>Order Date:</th>
+    <td><%= @order.created_at.to_formatted_s(:long) %></td>
+  </tr>
+  <tr>
+    <th>Items:</th>
+    <td>
+      <ul>
+        <% @order.book_orders.each do |item| %>
+          <li><%= item.book.title %> (Quantity: <%= item.quantity %>)</li>
+        <% end %>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <th>Total Amount:</th>
+    <td><%= @order.status %></td>
+  </tr>
+</table>
+
+<p>If you have any questions or concerns, please contact our customer support.</p>
+
+<p>Thank you for choosing our service!</p>

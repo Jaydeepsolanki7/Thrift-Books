@@ -5,9 +5,9 @@
     <button class="navbar-toggler " type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <% if user_signed_in? %>
+    <!--<% if user_signed_in? %>
       <a class="nav-link active" aria-current="page" href="#"><%=current_user.stripe_customer_id%></a>
-    <% end %>
+    <% end %> -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
         <div>
@@ -20,13 +20,13 @@
         <% if user_signed_in? %> 
           <div class="nav-item dropdown ">
             <a class="nav-link dropdown-toggle me-3" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <%= current_user.email%>
-              <%= link_to "Create New Order", new_order_path, class: "btn btn-primary" %>
+              <%= current_user.name%>
+              <%# <%= link_to "Create New Order", new_order_path, class: "btn btn-primary" %> 
 
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <%= link_to 'Edit Profile ', edit_user_registration_path,class:"dropdown-item my-1 me-auto" %>
-              <li><a class="dropdown-item" href="#">Something</a></li>
+              <li><a class="dropdown-item" href="<%=orders_path%>">My Orders</a></li>
               <li><hr class="dropdown-divider"></li>
               <%= button_to "Sign out", destroy_user_session_path, class: "dropdown-item  my-1 me-auto", method: :delete %> 
             </ul>
