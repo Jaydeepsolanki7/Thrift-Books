@@ -8,17 +8,17 @@ RSpec.describe User, type: :model do
     end
   end
 
-  # context "validation" do
-  #   before { create(:user) }
+  context "validation" do
+    before { create(:user) }
 
-  #   context "presence" do
-  #     it { should validate_presence_of :name }
-  #     it { should validate_presence_of :email }
-  #     it { should validate_presence_of :encrypted_password }
-  #   end
-  # end
+    context "presence" do
+      it { should validate_presence_of :name }
+      it { should validate_presence_of :email }
+      it { should validate_presence_of :encrypted_password }
+    end
+  end
 
-  # context "uniqueness" do
-  #   it { should validate_uniqueness_of :email }
-  # end
+  context "uniqueness" do
+    it { should validate_uniqueness_of :email }
+  end
 end
