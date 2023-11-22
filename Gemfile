@@ -63,6 +63,8 @@ gem 'stripe'
 gem 'cocoon'
 #
 gem 'rails-controller-testing'
+# 
+gem "faker"
 
 
 group :development, :test do
