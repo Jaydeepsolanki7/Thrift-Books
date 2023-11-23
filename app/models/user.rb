@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   rolify
+  validates :name, presence: true
   after_create :assign_default_role
   has_many :books, foreign_key: :author_id
   has_many :reviews
