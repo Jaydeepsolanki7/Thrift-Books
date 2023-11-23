@@ -25,10 +25,6 @@
               <div class="d-flex ordering">
                 <%= form_with(model: @book_order, url: create_order_path(id: @book.id), method: :post, local: true) do |form| %>
 
-                  <div class="mb-3">
-                    <%= form.label :quantity, class: "form-label" %>
-                    <%= form.number_field :quantity, class: "form-control", in: 1..@book.remaining_books %>
-                  </div>
                   <%= link_to "Add to Order", "#", method: :post, class: "btn btn-outline-warning btn-lg btn-block mt-3 me-2" %>
                   <%= form.submit "Buy Now", class: "btn btn-outline-danger btn-lg btn-block mt-3", data: { turbo: false } %>
                 <% end %>

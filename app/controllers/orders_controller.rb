@@ -33,7 +33,7 @@ class OrdersController < ApplicationController
     
         book_id: @book.id,
         user_id: current_user.id,
-        quantity: quantity
+        quantity: 1
         },
         line_items: [{
           price_data: {
@@ -43,7 +43,7 @@ class OrdersController < ApplicationController
             },
             unit_amount: @book.price,
           },
-          quantity: quantity,
+          quantity: 1,
         }],
         mode: 'payment',
         success_url: "#{root_url}orders",
@@ -58,9 +58,10 @@ class OrdersController < ApplicationController
   end
 
   def payment_completed
+    
     payload= request.body.read
     event= nil
-    endpoint_secret= 'whsec_1Cg3qDwDzNSimwiTEVRx9T8h2kLLXDm0'
+    endpoint_secret= 'whsec_sOJaXNbgPN1xXT8QNzGUSTfRzBUdIsu6'
     sig_header = request.env['HTTP_STRIPE_SIGNATURE']
     begin
       event = Stripe::Webhook.construct_event(payload, sig_header, endpoint_secret)
@@ -74,13 +75,12 @@ class OrdersController < ApplicationController
       session = event.data.object
       @user = session.metadata.user_id
       book_id = session.metadata.book_id
-      quantity = session.metadata.quantity
+      # quantity = session.metadata.quantity
       @book = Book.find_by(book_id)
-      @book.decrement!(:remaining_books, quantity)
+      # @book.decrement!(:remaining_books, quantity)
       @order = Order.create(user_id: @user.to_i)
-      @order.book_orders.create(book_id: book_id, quantity: quantity)
+      @order.book_orders.create(book_id: book_id.to_i, quantity: 1)
       OrderMailer.order_created_email(@order).deliver_now
-
     end
   end
   
