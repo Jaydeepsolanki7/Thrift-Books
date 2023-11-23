@@ -8,7 +8,6 @@ RSpec.describe Category, type: :model do
     it { should validate_presence_of(:name) }
   end
 
-  # Assuming you have a Category factory set up with FactoryBot
   let(:category) { create(:category) }
 
   describe 'validation tests' do

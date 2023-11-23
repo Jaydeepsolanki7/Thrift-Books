@@ -43,9 +43,4 @@ RSpec.describe Book, type: :model do
     book = build(:book, author: author, category: category)
     expect(book).to be_valid
   end
-
-  # it "is valid with valid attributes" do
-  #   book = build(:book, author: author, category: category)
-  #   expect(book).to be_valid
-  # end
 end
