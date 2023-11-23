@@ -58,10 +58,10 @@ class OrdersController < ApplicationController
   end
 
   def payment_completed
-    
+    debugger
     payload= request.body.read
     event= nil
-    endpoint_secret= 'whsec_sOJaXNbgPN1xXT8QNzGUSTfRzBUdIsu6'
+    endpoint_secret= 'whsec_o7dqRxYMyzTTMF0rWUV5wvKMwzwbdz9f'
     sig_header = request.env['HTTP_STRIPE_SIGNATURE']
     begin
       event = Stripe::Webhook.construct_event(payload, sig_header, endpoint_secret)
@@ -72,6 +72,7 @@ class OrdersController < ApplicationController
 
     case event.type
     when 'checkout.session.completed'
+      debugger
       session = event.data.object
       @user = session.metadata.user_id
       book_id = session.metadata.book_id
@@ -81,6 +82,14 @@ class OrdersController < ApplicationController
       @order = Order.create(user_id: @user.to_i)
       @order.book_orders.create(book_id: book_id.to_i, quantity: 1)
       OrderMailer.order_created_email(@order).deliver_now
+    end
+
+    if event.type == 'invoice.payment_failed'
+      debugger
+      session = event.data.object
+      status = session.status
+      sub = Subscription.find(1)
+      sub.update(status:"inactive")
     end
   end
   
