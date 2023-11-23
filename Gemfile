@@ -1,6 +1,6 @@
 source "https://rubygems.org"
 
-ruby "3.0.0"
+ruby "3.2.2"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.1"
@@ -72,10 +72,7 @@ gem 'shoulda-matchers'
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri windows ]
-<<<<<<< HEAD
-  gem "rspec-rails" 
-  # gem "factory_bot_rails"
-=======
+
   gem "rspec-rails"
   gem "factory_bot_rails"
 >>>>>>> f8064245a5b1bb86eab467c64bd1ad47f67de506
