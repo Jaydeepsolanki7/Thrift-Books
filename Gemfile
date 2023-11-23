@@ -75,7 +75,7 @@ group :development, :test do
 
   gem "rspec-rails"
   gem "factory_bot_rails"
->>>>>>> f8064245a5b1bb86eab467c64bd1ad47f67de506
+
 end
 
 group :development do
