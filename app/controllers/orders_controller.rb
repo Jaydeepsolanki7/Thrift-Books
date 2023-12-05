@@ -58,10 +58,9 @@ class OrdersController < ApplicationController
   end
 
   def payment_completed
-    debugger
     payload= request.body.read
     event= nil
-    endpoint_secret= 'whsec_o7dqRxYMyzTTMF0rWUV5wvKMwzwbdz9f'
+    endpoint_secret= 'whsec_8HNm0HLkiF3LfzodANCFcPD5tV5BZLzT'
     sig_header = request.env['HTTP_STRIPE_SIGNATURE']
     begin
       event = Stripe::Webhook.construct_event(payload, sig_header, endpoint_secret)
@@ -72,13 +71,10 @@ class OrdersController < ApplicationController
 
     case event.type
     when 'checkout.session.completed'
-      debugger
       session = event.data.object
       @user = session.metadata.user_id
       book_id = session.metadata.book_id
-      # quantity = session.metadata.quantity
       @book = Book.find_by(book_id)
-      # @book.decrement!(:remaining_books, quantity)
       @order = Order.create(user_id: @user.to_i)
       @order.book_orders.create(book_id: book_id.to_i, quantity: 1)
       OrderMailer.order_created_email(@order).deliver_now
@@ -90,6 +86,14 @@ class OrdersController < ApplicationController
       status = session.status
       sub = Subscription.find(1)
       sub.update(status:"inactive")
+    end
+
+    if event.type == 'invoice.paid'
+      debugger
+      session = event.data.object
+      status = session.status
+      sub = Subscription.find(1)
+      sub.update(status:"active")
     end
   end
   

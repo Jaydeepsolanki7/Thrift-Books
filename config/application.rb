@@ -23,7 +23,7 @@ module ThriftBooks
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
-    config.hosts << "a51c-60-254-111-210.ngrok-free.app"
-    config.hosts << "a51c-60-254-111-210.ngrok-free.app"
+    config.hosts << "aff0-2405-201-3027-e801-82b8-66f1-23cc-a7bf.ngrok-free.app"
+    config.hosts << "aff0-2405-201-3027-e801-82b8-66f1-23cc-a7bf.ngrok-free.app"
   end
 end

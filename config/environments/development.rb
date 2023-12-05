@@ -62,9 +62,6 @@ Rails.application.configure do
   # Suppress logger output for asset requests.
   config.assets.quiet = true
 
-  config.action_mailer.delivery_method = :letter_opener_web
-  config.action_mailer.perform_deliveries = true
-  config.action_mailer.default_url_options = { :host => "localhost:3000" }
 
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
@@ -77,5 +74,19 @@ Rails.application.configure do
 
   # Raise error when a before_action's only/except options reference missing actions
   config.action_controller.raise_on_missing_callback_actions = true
-  config.hosts << "7d74-2405-201-3027-e0bf-2fc7-a319-5d68-6436.ngrok-free.app"
+
+    #for mail
+    config.action_mailer.raise_delivery_errors = true
+    config.action_mailer.perform_deliveries = true
+    config.action_mailer.default_url_options = { :host => "localhost:3000" }
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.smtp_settings = {
+          :address => "smtp.gmail.com",
+          :port => 587,
+          :domain => 'gmail.com',
+          :user_name => "jasolanki@bestpeers.in",
+          :password => "ohkjwbdmxgcnmcvg",
+          :authentication => :plain,
+          :enable_starttls_auto => true
+    }
 end
